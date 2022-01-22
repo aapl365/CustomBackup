@@ -1,0 +1,6 @@
+# Put list of absolute or relative paths to files here.
+# Separate each file with a new line.
+# Hashed lines are considered as comments.
+# e.g.
+# ./foo.docx
+# /Users/foo/bar.txt
