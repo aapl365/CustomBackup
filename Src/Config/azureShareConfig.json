@@ -1,0 +1,6 @@
+{
+    "SAS_TOKEN": "<sas_token_here>",
+    "ACCOUNT_URL": "<https://account_here.file.core.windows.net/>",
+    "SHARE_NAME": "<share_name_here>"
+}
+

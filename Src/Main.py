@@ -2,13 +2,10 @@ from AzureShareClient import AzureShareClient
 from BackupQueue import BackupQueue
 
 if __name__ == '__main__':
-    SAS_TOKEN = '<sas_token_here>'
-    ACCOUNT_URL = '<account_url_here>'
-    SHARE_NAME = '<share_name_here>'
-
+    AZURE_SHARE_CONFIG_FILE_PATH = './Config/azureShareConfig.json'
     BACKUP_QUEUE_FILE_PATH = './Config/backupQueue.txt'
 
-    client = AzureShareClient(SAS_TOKEN, ACCOUNT_URL, SHARE_NAME)
+    client = AzureShareClient.init_by_file(AZURE_SHARE_CONFIG_FILE_PATH)
 
     backup_queue = BackupQueue(BACKUP_QUEUE_FILE_PATH)
     while True:

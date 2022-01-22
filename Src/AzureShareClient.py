@@ -1,3 +1,4 @@
+import json
 import os
 
 from azure.core.exceptions import ResourceNotFoundError
@@ -8,11 +9,25 @@ class AzureShareClient:
     Facade to interface with Azure File Shares.
     """
 
+    # Config file keys
+    _SAS_TOKEN = 'SAS_TOKEN'
+    _ACCOUNT_URL = 'ACCOUNT_URL'
+    _SHARE_NAME = 'SHARE_NAME'
+
     def __init__(self, sas_token: str, account_url: str, share_name: str):
         self._azure_client_inner = ShareClient(
             account_url=account_url,
             share_name=share_name,
             credential=sas_token)
+
+    @classmethod
+    def init_by_file(cls, file_path: str):
+        with open(file_path, 'r') as client_file:
+            config = json.load(client_file)
+        return cls(config[AzureShareClient._SAS_TOKEN],
+                   config[AzureShareClient._ACCOUNT_URL],
+                   config[AzureShareClient._SHARE_NAME] )
+
 
     def upload_file_to_root(self, file_path: str, overwrite_existing: bool=False):
         """
