@@ -8,8 +8,9 @@ class BackupQueue:
         self._queue = []
         with open(queue_file_path, 'r') as queue_file:
             for line in queue_file:
-                if not line.startswith('#'):
-                    self.enqueue(line)
+                cleaned_line = line.strip()
+                if not cleaned_line.startswith('#'):
+                    self.enqueue(cleaned_line)
 
     def enqueue(self, file_path: str):
         self._queue.append(Path(file_path))
