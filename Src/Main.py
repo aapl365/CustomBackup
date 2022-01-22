@@ -10,7 +10,11 @@ if __name__ == '__main__':
     backup_queue = BackupQueue(BACKUP_QUEUE_FILE_PATH)
     while True:
         try:
-            file_path = backup_queue.dequeue()
-            client.upload_file_to_root(str(file_path))
+            (src_path, dest_path) = backup_queue.dequeue()
+            if dest_path is not None:
+                client.upload_file(str(src_path), dest_path=str(dest_path))
+            else:
+                client.upload_file(str(src_path))
+
         except IndexError:
             break
