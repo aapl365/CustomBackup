@@ -14,7 +14,7 @@ class BackupQueue:
 
     def enqueue_file_line(self, file_line: str):
         cleaned_line = file_line.strip()
-        if cleaned_line.startswith('#'):
+        if cleaned_line.startswith('#') or len(cleaned_line) == 0:
             return
 
         src_dest_split = cleaned_line.split(BackupQueue._SRC_DEST_DELIMETER)
